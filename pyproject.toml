@@ -62,7 +62,7 @@ exclude = ["tests*"]
 # we need this becuase our project escapes default hatch file selection.
 # see https://hatch.pypa.io/latest/plugins/builder/wheel/#default-file-selection
 [tool.hatch.build.targets.wheel]
-packages = ["/tutorindigo"]
+packages = ["tutorindigo"]
 
 [tool.hatch.metadata.hooks.custom]
 path = ".hatch_build.py"
