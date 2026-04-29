@@ -1,6 +1,7 @@
 {% raw %}
 {% load i18n %}
 {% load ace %}
+{% load static %}
 
 {% get_current_language as LANGUAGE_CODE %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
@@ -44,7 +45,7 @@
           <tr>
             <td align="left" valign="middle">
               <a href="{% with_link_tracking homepage_url %}">
-                <img src="{{ logo_url }}" style="max-height:65px;" alt="{% filter force_escape %}{% blocktrans %}Go to {{ platform_name }} Home Page{% endblocktrans %}{% endfilter %}" />
+                <img src="{% static 'images/logo.png' %}" style="max-height:65px;" alt="{% filter force_escape %}{% blocktrans %}Go to {{ platform_name }} Home Page{% endblocktrans %}{% endfilter %}" />
               </a>
             </td>
             <td align="right" valign="middle">
@@ -64,29 +65,29 @@
     </tr>
 
     <tr>
-      <td class="footer" style="padding:20px;background-color:#15376D;color:#f3f7ff;">
+      <td class="footer" style="padding:20px;background-color:#555555;color:#f0f0f0;">
         <table role="presentation" width="100%" align="left" border="0" cellpadding="0" cellspacing="0">
           <tr>
-            <td style="padding-bottom:10px;color:#f3f7ff;">
-              &copy; {% now "Y" %} <span style="color:#ffffff;font-weight:700;">{{ platform_name }}</span>, {% trans "All rights reserved" as tmsg %}{{ tmsg|force_escape }}.
+            <td style="padding-bottom:10px;color:#f0f0f0;">
+              &copy; {% now "Y" %} <span style="color:#DA291C;font-weight:700;">{{ platform_name }}</span>, {% trans "All rights reserved" as tmsg %}{{ tmsg|force_escape }}.
             </td>
           </tr>
           {% if social_media_urls %}
             <tr>
-              <td style="padding-bottom:10px;color:#dfe8ff;">
+              <td style="padding-bottom:10px;color:#d4d4d4;">
                 {% trans "Connect with us" %}
               </td>
             </tr>
             <tr>
               <td style="padding-bottom:10px;">
                 {% for social_name, social_url in social_media_urls.items %}
-                  <a href="{{ social_url }}" style="color:#ffffff;text-decoration:underline;">{{ social_name }}</a>{% if not forloop.last %}&nbsp;&nbsp;|&nbsp;&nbsp;{% endif %}
+                  <a href="{{ social_url }}" style="color:#DA291C;text-decoration:none;">{{ social_name }}</a>{% if not forloop.last %}&nbsp;&nbsp;|&nbsp;&nbsp;{% endif %}
                 {% endfor %}
               </td>
             </tr>
           {% endif %}
           <tr>
-            <td style="color:#dfe8ff;">
+            <td style="color:#d4d4d4;">
               {% trans "Our mailing address is" as tmsg %}{{ tmsg|force_escape }}:<br/>
               {{ contact_mailing_address }}
             </td>
