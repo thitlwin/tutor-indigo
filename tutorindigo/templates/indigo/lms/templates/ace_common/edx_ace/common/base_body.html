@@ -1,0 +1,102 @@
+{% raw %}
+{% load i18n %}
+{% load ace %}
+
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+
+{# Hidden preview text shown by many email clients. #}
+<div lang="{{ LANGUAGE_CODE|default:"en" }}" style="
+  display:none;
+  font-size:1px;
+  line-height:1px;
+  max-height:0;
+  max-width:0;
+  opacity:0;
+  overflow:hidden;
+  visibility:hidden;
+">
+  {% block preview_text %}{% endblock %}
+</div>
+
+{% for image_src in channel.tracker_image_sources %}
+  <img src="{{ image_src }}" alt="" role="presentation" aria-hidden="true" />
+{% endfor %}
+
+{% google_analytics_tracking_pixel %}
+
+<div bgcolor="#f5f5f5" lang="{{ LANGUAGE_CODE|default:"en" }}" dir="{{ LANGUAGE_BIDI|yesno:"rtl,ltr" }}" style="
+  margin:0;
+  padding:0;
+  min-width:100%;
+  background-color:#f5f5f5;
+">
+  <table role="presentation" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#fbfaf9" width="100%" style="
+    font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size:1em;
+    line-height:1.5;
+    max-width:600px;
+    padding:0 20px;
+  ">
+    <tr>
+      <td class="header" style="background-color:#f5f5f5;padding:12px 20px;border-top:4px solid #15376D;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td align="left" valign="middle">
+              <a href="{% with_link_tracking homepage_url %}">
+                <img src="{{ logo_url }}" style="max-height:65px;" alt="{% filter force_escape %}{% blocktrans %}Go to {{ platform_name }} Home Page{% endblocktrans %}{% endfilter %}" />
+              </a>
+            </td>
+            <td align="right" valign="middle">
+              <a href="{% with_link_tracking dashboard_url %}" target="_blank" style="font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;text-decoration:none;color:#15376D;font-weight:700;">
+                {% trans "My Account" %}
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="main" bgcolor="#ffffff" style="padding:20px 24px 30px;border:1px solid #d8dde6;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+        {% block content %}{% endblock %}
+      </td>
+    </tr>
+
+    <tr>
+      <td class="footer" style="padding:20px;background-color:#15376D;color:#f3f7ff;">
+        <table role="presentation" width="100%" align="left" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="padding-bottom:10px;color:#f3f7ff;">
+              &copy; {% now "Y" %} <span style="color:#ffffff;font-weight:700;">{{ platform_name }}</span>, {% trans "All rights reserved" as tmsg %}{{ tmsg|force_escape }}.
+            </td>
+          </tr>
+          {% if social_media_urls %}
+            <tr>
+              <td style="padding-bottom:10px;color:#dfe8ff;">
+                {% trans "Connect with us" %}
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-bottom:10px;">
+                {% for social_name, social_url in social_media_urls.items %}
+                  <a href="{{ social_url }}" style="color:#ffffff;text-decoration:underline;">{{ social_name }}</a>{% if not forloop.last %}&nbsp;&nbsp;|&nbsp;&nbsp;{% endif %}
+                {% endfor %}
+              </td>
+            </tr>
+          {% endif %}
+          <tr>
+            <td style="color:#dfe8ff;">
+              {% trans "Our mailing address is" as tmsg %}{{ tmsg|force_escape }}:<br/>
+              {{ contact_mailing_address }}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<span id="ace-message-id" style="display:none;">{{ message.log_id }}</span>
+<span id="template-revision" style="display:none;">{{ template_revision }}</span>
+{% endraw %}

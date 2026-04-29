@@ -1,0 +1,37 @@
+{% raw %}
+{% load i18n %}
+{% load ace %}
+
+<p>
+    {# Keep styles inline for broad email client support. #}
+    <a
+    {% if reset_url %}
+        href={{ reset_url }}
+    {% elif course_cta_url %}
+        href="{% with_link_tracking course_cta_url %}"
+    {% else %}
+        {% if course_ids|length > 1 %}
+            href="{% with_link_tracking dashboard_url %}"
+        {% else %}
+            href="{% with_link_tracking course_url %}"
+        {% endif %}
+    {% endif %}
+    style="
+        color:#ffffff;
+        text-decoration:none;
+        border-radius:4px;
+        -webkit-border-radius:4px;
+        -moz-border-radius:4px;
+        background-color:#15376D;
+        border-top:12px solid #15376D;
+        border-bottom:12px solid #15376D;
+        border-right:28px solid #15376D;
+        border-left:28px solid #15376D;
+        display:inline-block;
+        font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+        font-weight:700;
+    ">
+        <font color="#ffffff"><b>{{ course_cta_text }}</b></font>
+    </a>
+</p>
+{% endraw %}
