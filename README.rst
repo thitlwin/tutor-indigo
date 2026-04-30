@@ -27,7 +27,7 @@ Configuration
 -------------
 
 - ``INDIGO_WELCOME_MESSAGE`` (default: "The place for all your online learning")
-- ``INDIGO_PRIMARY_COLOR`` (default: "#3b85ff")
+- ``INDIGO_PRIMARY_COLOR`` (default: "#DA291C")
 - ``INDIGO_FOOTER_NAV_LINKS`` (default: ``[{"title": "About", "url": "/about"}, {"title": "Contact", "url": "/contact"}]``)
 - ``INDIGO_ENABLE_DARK_TOGGLE`` (default: True)
 
